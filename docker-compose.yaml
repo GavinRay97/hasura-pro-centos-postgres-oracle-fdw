@@ -1,0 +1,17 @@
+version: "3.6"
+
+services:
+    hasura-pro-centos-with-postgres-containing-oracle-fdw:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        ports:
+            - 8020:8080
+            - 5430:5432
+        volumes:
+            - db_data:/var/lib/postgresql/data
+        environment:
+            HASURA_GRAPHQL_DATABASE_URL: postgres://postgres@localhost:5432/postgres
+            HASURA_GRAPHQL_ENABLE_CONSOLE: true
+volumes:
+    db_data:
